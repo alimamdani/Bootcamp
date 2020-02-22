@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="style.css">
+  
+    <title>Document</title>
+    <link rel="shortcut icon" href="#" />
+</head>
+<body>
+        <div class="keys"> <!--Open Keys-->
+            <div data-key="65" class="key"> <!--Open Datakey-65-->
+                <kbd>A</kbd>
+                <span class="sound">Clap</span>
+            </div> <!--Close Datakey-65-->
+            <div data-key="83" class="key"> <!--Open Datakey-83-->
+                <kbd>S</kbd>
+                <span class="sound">hihat</span>
+            </div> <!--Close Datakey-83-->
+            <div data-key="68" class="key"> <!--Open Datakey-68-->
+                <kbd>D</kbd>
+                <span class="sound">Kick</span>
+            </div> <!--Close Datakey-68-->
+            <div data-key="70" class="key"> <!--Open Datakey-70-->
+                <kbd>F</kbd>
+                <span class="sound">openhat</span>
+            </div> <!--Close Datakey-70-->
+            <div data-key="71" class="key"> <!--Open Datakey-71-->
+                <kbd>G</kbd>
+                <span class="sound">boom</span>
+            </div> <!--Close Datakey-65-->
+            <div data-key="72" class="key"> <!--Open Datakey-72-->
+                <kbd>H</kbd>
+                <span class="sound">ride</span>
+            </div> <!--Close Datakey-72-->
+            <div data-key="74" class="key"> <!--Open Datakey-74-->
+                <kbd>J</kbd>
+                <span class="sound">snare</span>
+            </div> <!--Close Datakey-74-->
+            <div data-key="75" class="key"> <!--Open Datakey-75-->
+                <kbd>K</kbd>
+                <span class="sound">tom</span>
+            </div> <!--Close Datakey-65-->
+            <div data-key="76" class="key"> <!--Open Datakey-76-->
+                <kbd>L</kbd>
+                <span class="sound">tink</span>
+            </div> <!--Close Datakey-76-->
+            
+        </div> <!--Close Keys-->
+
+
+        <audio data-key="65" src="./sounds/clap.wav"></audio>
+        <audio data-key="83" src="./sounds/hihat.wav"></audio>
+        <audio data-key="68" src="./sounds/kick.wav"></audio>
+        <audio data-key="70" src="./sounds/openhat.wav"></audio>
+        <audio data-key="71" src="./sounds/boom.wav"></aaudio>
+        <audio data-key="72" src="./sounds/ride.wav"></audio>
+        <audio data-key="74" src="./sounds/snare.wav"></audio>
+        <audio data-key="75" src="./sounds/tom.wav"></audio>
+        <audio data-key="76" src="./sounds/tink.wav"></audio>
+    
+
+        <script>
+            window.addEventListener('keydown' , function(e) {
+                const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+                const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+                if(!audio) return;
+                audio.currentTime = 0;
+                audio.play();
+                key.classList.add('playing');
+
+                
+            });
+
+            function removeEventListener(e) {
+                if(e.propertyName !== 'transform') return;
+                this.classList.remove('playing');
+                
+            }
+
+            const keys = document.querySelectorAll('.key');
+            keys.forEach(key => key.addEventListener('transitionend' , removeEventListener));
+
+        </script>
+
+
+
+</body>
+</html>
